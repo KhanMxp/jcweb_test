@@ -1,0 +1,76 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <form class="form-horizontal" id="myform" action="" method="post">
+            <div class="form-group">
+                <label class="col-sm-1 control-label talign-center fz13"></label>
+                <div class="col-sm-11">
+                    <button type="submit" class="btn btn-success " onclick="doAdd()">保存</button>
+                    <button type="button" class="btn btn-success" onclick="javascript:history.go(-1);">返 回</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label talign-center fz13">受检单位名称</label>
+                <div class="col-sm-11">
+                    <input type="text" name="unit" class="col-sm-8" value="{$one.unit}">
+                    <input type="hidden" name="id" value="{$one.id}"/>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-1 control-label talign-center fz13">中心编号</label>
+            <div class="col-sm-11">
+                <input type="text" name="code" class="col-sm-8" value="{$one.code}">
+            </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label talign-center fz13">状态</label>
+                <div class="col-sm-11">
+                <if condition="$one['status'] eq 0">
+                        <input type="radio" name="status" value="1"> 开启&nbsp;
+                        <input type="radio" name="status" value="0" checked> 禁用
+                    <else/>
+                        <input type="radio" name="status" value="1" checked> 开启&nbsp;
+                        <input type="radio" name="status" value="0"> 禁用
+                </if>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label talign-center fz13">内容</label>
+                <div class="col-sm-11">
+                    <textarea id="content" name="content" >{$one.content}</textarea>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    function doAdd(){
+        var options = {
+            url: "{:U('/admin/report/saveReport')}",
+            dataType: 'json',
+            beforeSubmit: function(){
+                return true;
+            },
+            success: function (data) {
+                if(data.msg=='succ'){
+                    var _options = {"text":"保存成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"保存失败！"};
+                    if(data.info) _options.text = data.info;
+                    doAlertDialog(_options);
+                }
+            }
+        };
+        $("#myform").ajaxForm(options);
+        return false;
+    }
+</script>
+<include file="Common:footer" />

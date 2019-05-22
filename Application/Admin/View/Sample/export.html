@@ -1,0 +1,41 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <form id="form2" name="form1" method="post" action="{:U('/admin/sample/doExport')}">
+            <table class="table table-bordered table-striped table-hover">
+                <tr>
+                    <td  colspan="9" ><p align="center" >填 写 导 出 时 间</p></td>
+                </tr>
+                <tr>
+                    <td ><p align="center" ><span style="color:red; font-size:15px">*</span>起始时间 </p></td>
+                    <td  colspan="2"><input name="begindate" type="date" class="form-control"  id="begindate" size="20" /></td>
+                    <td  colspan="1"><p align="center" ><span style="color:red; font-size:15px">*</span>终止时间 </p></td>
+                    <td  colspan="2"><input name="enddate" type="date" class="form-control"  id="enddate" size="20" /></td>
+                </tr>
+            </table>
+            <button class="btn btn-success" type="button" id="export_list" onClick="docheck()">导出</button>
+            <button type="submit" style="display:none;" id="export_list2" href="{:U('/admin/sample/doExport')}">导出</button>
+            <!-- <button class="btn btn-success" type="button" id="sampling_list" on>生成抽样单</button>-->
+
+        </form>
+    </div>
+</div>
+
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    //校验时间不能为空
+    function docheck(){
+        var begindate = $("#begindate").val();
+        var enddate = $("#enddate").val();
+        if(!begindate|| !enddate){
+            var _options = {"flag":"error","text":"请选定起止时间！","buttons":{"ok":{}}};
+            doConfirmDialog(_options);
+        }else{
+            // document.getElementById("export_list2").click();
+            $("#form2").submit();
+        }
+    }
+</script>
+
+<include file="Common:footer" />

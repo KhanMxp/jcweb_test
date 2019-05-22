@@ -1,0 +1,116 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/home/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        产品及解决方案
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div id="page-inner" class="container" >
+
+    <div class="titlename">
+            <h3 name="information">高性能外延材料与器件</h3>
+        <span class="line1"></span>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <volist name="list" id="vo">
+            <div class="col-sm-3 col-md-3">
+                <div class="thumbnail" style="height: 230px;">
+                    <a href="{:U('/home/Information/productionDetail')}?type=A&id={$vo['id']}"><img src="{$vo['thumb_path']}" alt="..." onerror="this.src='__PUBLIC__/static/images/1526008143_thumb.gif'" class="img-responsive" ></a>
+                    <div class="caption production_detail">
+                        <h4 style="height: 18.9px;"> 产品名称：{$vo['name']}</h4>
+                    </div>
+                    <p style="text-align: center"><a href="{:U('/home/Information/productionDetail')}?type=A&id={$vo['id']}">详情</a></p>
+                </div>
+            </div>
+            </volist>
+        </div>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+    </div>
+</div>
+<div class="container">
+    <div class="titlename">
+        <h3 name="waiyan">专用设备服务</h3>
+        <span class="line1"></span>
+    </div>
+    <div class=" col-md-12">
+        <div class="row">
+            <volist name="one" id="dy">
+            <div class="col-sm-3 col-md-3 ">
+                <div class="thumbnail" style="min-height: 230px;">
+                    <a href="{:U('/home/Information/productionDetail')}?type=B&id={$dy['id']}">
+                        <img src="{$dy['thumb_path']}" alt="..."  onerror="this.src='__PUBLIC__/static/images/1526008143_thumb.gif'" ></a>
+                    <div class="caption production_detail">
+                        <h4 style="height: 18.9px;">{$dy['name']}</h4>
+                    </div>
+                    <p style="text-align: center"><a href="{:U('/home/Information/productionDetail')}?type=B&id={$dy['id']}">详情</a></p>
+                </div>
+            </div>
+            </volist>
+        </div>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination1">{$page}</nav></div>
+    </div>
+</div>
+<!--<div class="container">
+    <div class="col-md-12" style="text-align: center; padding-bottom: 30px;">
+        <ul class="nav nav-pills" style="display: inline-block;float: none;">
+            <li role="presentation" class="active"><a name="stage">平台服务</a></li>
+        </ul>
+    </div></div>
+<div class="container">
+    <div id="pingtai" >
+        <div class="row ">
+            <center>
+            <div class="col-sm-6">
+        <div class="panel " >
+        <div class="panel-heading">质量保证</div>
+        <div class="panel-body">
+            <p style=" font-size: 15px;">{$service.quality}</p>
+        </div>
+        </div>
+            </div>
+            <div class="col-sm-6">
+        <div class="panel " >
+            <div class="panel-heading">售后服务</div>
+            <div class="panel-body">
+                <p style=" font-size: 15px;">{$service.customer_service}</p>
+            </div>
+        </div>
+            </div>
+                <div class="col-sm-6">
+        <div class="panel " >
+            <div class="panel-heading">技术培训</div>
+            <div class="panel-body">
+                <p style=" font-size: 15px;">{$service.technology}</p>
+            </div>
+        </div>
+                </div>
+                    <div class="col-sm-6">
+        <div class="panel" >
+            <div class="panel-heading">客服在线</div>
+            <div class="panel-body">
+                <p style=" font-size: 15px;">{$service.service_online}</p>
+            </div>
+        </div>
+                    </div>
+            </center>
+        </div>
+    </div>-->
+    <!-- service end -->
+</div>
+<include file="Common:footbody" />

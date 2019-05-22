@@ -1,0 +1,93 @@
+<include file="Common:header" title="后台首页"/>
+<div>
+    <style type="text/css">
+        div{text-align:center;}
+        thead{text-align:center;}
+        th{text-align:center;}
+
+    </style>
+    <a class="btn btn-success btn-xs" href="{:U('/admin/report/addReport')}"><i class="glyphicon glyphicon-plus"></i>新增</a><p/>
+    <table class="table table-bordered table-bordered table-hover">
+
+        <thead>
+        <th width="10%">id</th>
+        <th width="30%">受检单位</th>
+        <th width="30%">中心编号</th>
+        <th width="10%">状态</th>
+        <th >操作</th>
+        </thead>
+        <tbody>
+        <volist name="list" id="one">
+            <tr>
+
+                <td >{$one.id}</td>
+                <td >{$one.unit}</td>
+                <td>{$one.code}</td>
+                <td>
+                    <if condition="$one['status'] eq 0">关闭</if>
+                    <if condition="$one['status'] eq 1">开启</if>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="{:U('/admin/report/addReport')}?id={$one.id}" ><i class="glyphicon glyphicon-cog"></i>修改内容</a>
+                    <a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="onDelete('{$one.id}')" ><i class="glyphicon glyphicon-trash"></i>删除</a>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        var de = $("#de_choose").val();
+        $("li[name='de']").removeClass("active");
+        $("#de_"+de).addClass("active");
+    });
+    //设为首页左边展板
+    function doSpecial(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/edit/doSpecial')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"设置成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"设置失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+    //删除
+    function onDelete(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定要删除吗！","buttons":{"ok":{"action":function(){doneDel(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneDel(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/report/doRepDelete')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"删除成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"删除失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+</script>
+<include file="Common:footer" />

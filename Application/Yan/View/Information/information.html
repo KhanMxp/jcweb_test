@@ -1,0 +1,53 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="padding-top: 30px;padding-bottom: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/yan/Index/index">
+                        首页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        动态资讯
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div id="page-inner" class="container" >
+    <div class="index-box-about">
+        <div class="box-title">
+            <span class="box-title-line"></span>
+            <h4>news</h4>
+            <h2>动态<strong>资讯</strong></h2>
+        </div>
+    </div>
+<!--动态资讯的内容-->
+    <div class="col-md-12">
+        <div class="row">
+            <volist name="list" id="vo">
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail" style="height: 442px;">
+                    <a href="{:U('/yan/Information/informationDetail')}?type=1&id={$vo['id']}" >
+                        <img src="{$vo['information_images_path']}" alt="..." class="img-responsive" onerror="this.src='__PUBLIC__/static/images/1526008143_thumb.gif'" ></a>
+                    <div class="caption info_detail">
+                    <h3 style="height:26px;text-overflow:ellipsis; white-space:nowrap; overflow:hidden; ">{$vo.title}</h3>
+                            <p>{$vo.save_time|strtotime|date=Y年m月d日,###}</p>
+                        <p><php>$vo['content'] = strip_tags($vo['content']);</php>{$vo.content}</p>
+                    <p><a href="{:U('/yan/Information/informationDetail')}?type=1&id={$vo['id']}" >more></a></p>
+                    </div>
+                </div>
+            </div>
+            </volist>
+        </div>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+    </div>
+</div>
+
+<include file="Common:footbody" />

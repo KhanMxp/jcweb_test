@@ -1,0 +1,92 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/yan/Index/index">
+                        主页
+                    </a>
+                    </li>
+                    <li>
+                        <if condition="$type eq 1">
+                        <a href="/yan/Information/information">
+                            动态资讯
+                        </a>
+                            <else />
+                            <a href="/yan/Information/information#dynamic">
+                                行业动态
+                            </a>
+                        </if>
+
+                    </li>
+                    <li class="active">
+                        详情
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="container" style="padding-left: 200px;padding-right: 200px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="pf-img">
+                <center><img src="{$list['picture_path']}" alt="" class="img-responsive"></center>
+            </div>
+
+        </div>
+    </div>
+</div>-->
+<div class="container property">
+    <div class="container" id="info_detail">
+        <div class="row">
+            <!--portfolio-single start-->
+
+            <div class="col-lg-12 ">
+                <div class="title ">
+                    <h3>{$list.title}</h3>
+                    <hr>
+                </div>
+
+                <div class="pf-detail " >
+                <p>{$list.save_time|strtotime|date=Y年m月d日,###}</p>
+                    <p>{$list.content}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container" id="info_other">
+    <p>上一篇：<a href="{:U('/yan/Information/informationDetail')}?type={$front['type']}&id={$front['id']}">{$front.title}</a></p>
+    <p>下一篇：<a href="{:U('/yan/Information/informationDetail')}?type={$after['type']}&id={$after['id']}">{$after.title}</a></p>
+</div>
+</div>
+<div style="background-color: #f8f8f8;">
+    <div class="container">
+    <div class="list-dynamic col-md-12">
+        <div class="row">
+            <volist name="one" id="dy">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" style="height: 442px;">
+                        <a href="{:U('/yan/Information/informationDetail')}?type={$dy['type']}&id={$dy['id']}" ><img src="{$dy['information_images_path']}" alt="..." onerror="this.src='__PUBLIC__/static/images/1526008143_thumb.gif'"></a>
+                        <div class="caption info_detail">
+                            <h3 style="height:26px;text-overflow:ellipsis; white-space:nowrap; overflow:hidden; ">{$dy.title}</h3>
+                            <p>{$dy.save_time|strtotime|date=Y年m月d日,###}</p>
+                            <p><php>$dy['content'] = strip_tags($dy['content']);</php>{$dy.content}</p>
+                            <p><a href="{:U('/yan/Information/informationDetail')}?type={$dy['type']}&id={$dy['id']}" >more></a></p>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+
+        </div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+</script>
+<include file="Common:footbody" />

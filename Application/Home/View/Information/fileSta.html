@@ -1,0 +1,58 @@
+<include file="Common:head" title="前台导航栏"/>
+<div class="picContainer">
+    <img src="{$head_image.pic_path}" alt="资料下载">
+    <a id="fix-title" href="">资料下载</a>
+</div>
+<div class="container-two" id="container-content" style="position: relative" }>
+    <div class="row">
+        <div class="col-xs-2 col-md-2 left-menu">
+            <ul>
+                <li><a class="hvr-wobble-skew" href="/Home/Information/file">检测资料</a></li>
+                <li><a class="sec-nav-active" href="/Home/Information/fileSta">标准资料</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-10 col-md-10 right-content">
+            <div class="breadcrumbs">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-8">
+                        <ol class="breadcrumb pull-left">
+                            <li>
+                                <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                            </li>
+                            <li>
+                                <a href="/Home/Information/file">资料下载</a>
+                            </li>
+                            <li>
+                               <span>标准资料</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="right-content-details">
+                <div class="col-xs-12 col-md-12">
+                    <ul class="media-list" id="notice-list">
+                        <volist name="standard" id="vo" key="{i}">
+                            <li class="media">
+                                    <div class="media-left">
+                                        <a  href="{$vo['save_path']}" download="{$vo['filename']}">
+                                            <img class="media-object" src='__PUBLIC__/picture/disc.png' alt="......">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <span class="media-title-text">{$vo.filename}</span><span class="scope-time">发布：{$vo.savetime}</span>
+                                            <span class="file-download"><a href="{$vo['save_path']}" download="{$vo['filename']}">[下载]</a></span>
+                                        </h4>
+                                    </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <nav>{$pagination}</nav>
+        </div>
+    </div>
+</div>
+</div>
+<include file="Common:footer"/>

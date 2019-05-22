@@ -1,0 +1,86 @@
+<include file="Common:head" title="前台导航栏"/>
+<div class="picContainer">
+    <img src="{$head_image.pic_path}" alt="质检范围">
+    <a id="fix-title" href="">质检范围</a>
+</div>
+<div class="container-two" id="container-content" style="position: relative" }>
+    <div class="col-xs-2 col-md-2 left-menu">
+        <ul>
+            <li><a class="hvr-underline-reveal" href="/Home/Information/process">质检流程</a></li>
+            <li><a class="sec-nav-active" href="/Home/Information/scope">质检范围</a></li>
+            <li><a class="hvr-underline-reveal" href="/Home/Information/reportQuery">报告查询</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-10 col-md-10 right-content">
+        <div class="breadcrumbs">
+            <div class="row">
+                <div class="col-lg-8 col-sm-8">
+                    <ol class="breadcrumb pull-left">
+                        <li>
+                            <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                        </li>
+                        <li>
+                            <a href="/Home/Information/process">
+                                质检服务
+                            </a>
+                        </li>
+                        <li>
+                            <span>质检范围</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="right-content-details">
+            <div class="col-xs-12 col-md-12">
+                <div class="row">
+                    <div class="input-group sec-input-group">
+                        <input id="searchText" type="text" class="form-control" placeholder="请输入检索关键字...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="handleSearch()">搜索</button>
+                        </span>
+                    </div>
+                </div>
+                <ul class="media-list" id="notice-list">
+                    <foreach name="list" item="vo">
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="{:U('/Home/Information/scopeDetail')}?type=B&cate_num={$vo.cate_num}">
+                                    <img class="media-object" src='__PUBLIC__/picture/disc.png' alt="......">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="{:U('/Home/Information/scopeDetail')}?type=B&cate_num={$vo.cate_num}" style="color: #000;">
+                                    <h4 class="media-heading"><span class="media-title-text">{$vo.cate_name}</span></h4>
+                                </a>
+                            </div>
+                        </li>
+                    </foreach>
+                    
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function handleSearch(){
+        var searchValue = $("#searchText").val();
+        console.log("searchValue", typeof searchValue)
+
+        $.ajax({
+            type:"post",
+            url:"{:U('/Home/Information/searchIns')}",
+            data:{"type": "A", "word": searchValue},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg === 'succ'){
+                   window.location.href="{:U('/Home/Information/scopeDetail')}?type=A&word="+searchValue
+                }else{
+                   window.confirm(ret.msg)
+                }
+            }
+        });
+    }
+</script>
+<include file="Common:footer"/>

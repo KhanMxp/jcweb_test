@@ -1,0 +1,36 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <th width="10%">订单id</th>
+            <th width="15%">提交人</th>
+            <th width="20%">受检单位</th>
+            <th width="20%">上次修改时间</th>
+            <th >操作</th>
+            </thead>
+            <tbody>
+            <volist name="list" id="one">
+                <tr>
+                    <td >{$one.id}</td>
+                    <td >{$one.authname}</td>
+                    <td >{$one.clientname}</td>
+                    <td>{$one.lastedit}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{:U('/admin/sample/view')}?id={$one.id}"><i class="glyphicon glyphicon-cog"></i>查看</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+
+        </table>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+        <!-- main end-->
+
+    </div>
+</div>
+
+
+
+<include file="Common:footer" />

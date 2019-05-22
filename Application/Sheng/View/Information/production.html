@@ -1,0 +1,97 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/sheng/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        产品和解决方案
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div id="page-inner" class="container" >
+
+    <div class="detail-box-about">
+        <div class="box-title">
+            <h2>高性能外延材料<strong>与器件</strong></h2>
+            <span class="box-title-line"></span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <volist name="list" id="vo">
+                <if condition="$vo[thumb_path]">
+            <div class="col-sm-3 col-md-3">
+                <div class="thumbnail" style="height: 230px;">
+                    <a href="{:U('/home/Information/productionDetail')}?type=A&id={$vo['id']}"><img src="{$vo['thumb_path']}" alt="..." onerror="this.src='__PUBLIC__/static/images/1526008143_thumb.gif'" class="img-responsive" ></a>
+                    <div class="caption production_detail">
+                        <h4 style="height: 18.9px;"> 产品名称：{$vo['name']}</h4>
+                    </div>
+                    <p style="text-align: center"><a href="{:U('/home/Information/productionDetail')}?type=A&id={$vo['id']}">详情</a></p>
+                </div>
+            </div>
+                </if>
+            </volist>
+        </div>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+    </div>
+</div>
+<div class="container">
+    <div class="detail-box-about">
+        <div class="box-title">
+            <h2>专用设备<strong>服务</strong></h2>
+            <span class="box-title-line"></span>
+        </div>
+    </div>
+
+    <!--内容部分-->
+    <section>
+                <div class="solutionTitle">
+                    <volist name="one" id="dy" key="i">
+                        <if condition="$i%2 eq 0">
+                            <div class="productinfo">
+                            <div class="row">
+                        <div class="leftP col-sm-5"><img src="{$dy['picture_path']}" class="img-responsive"></div>
+                        <div class="rightP toggleInfo col-sm-7">
+                            <a class="anfang">
+                                <h2>{$dy['name']}</h2>
+                                {$dy['content']}
+                            </a>
+                    </div>
+                            </div>
+                            </div>
+                       <else />
+                            <div class="productinfo">
+                            <div class="row">
+                        <div class="leftinfo toggleInfo col-sm-7 col-xs-12">
+                            <a class="biycle">
+                                <h2>{$dy['name']}</h2>
+                                {$dy['content']}
+                            </a>
+                        </div>
+                        <div class="rightP col-sm-5 col-sm-12"><img src="{$dy['picture_path']}" class="img-responsive"></div>
+                            </div>
+                    </div>
+                        </if>
+                    </volist>
+
+                </div>
+
+
+    </section>
+
+</div>
+
+</div>
+<include file="Common:footbody" />

@@ -1,0 +1,81 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <ul class="nav nav-tabs">
+           <!-- <li role="presentation"  id="de_A" name="de"><a href="/admin/diedit/production?de=A" >高性能外延材料与器件</a></li>-->
+            <li role="presentation" class="active"id="de_B" name="de"><a href="/admin/diedit/production?de=B">专用设备服务</a></li>
+            <input type="hidden" id="de_choose" value="{$de}"/>
+        </ul>
+        <p></p>
+
+            <a href="{:U('/admin/diedit/addProduction')}?de={$de}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus" ></i>新增</a>
+            <p></p>
+            <div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <th width="15%">图片</th>
+                    <th >产品名称</th>
+                    <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <volist name="lists" id="one">
+                        <tr>
+                            <td>
+                                <a href="javascript:void(0);" name="{$one.thumb_path}" onclick="return Check(this);">
+                                    <img src="{$one.thumb_path}" onerror="this.src='__PUBLIC__/static/images/default-timg.gif'" style="width: 90px;"/>
+                                </a>
+                            </td>
+                            <td>{$one.name}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('/admin/diedit/informationPicture')}?id={$one.id}&type=P" ><i class="glyphicon glyphicon-picture"></i>插入/更换展示图片</a>
+                                <a href="{:U('/admin/diedit/addProduction')}?id={$one.id}&de={$one.type}" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> 编辑</a>
+                                <a href="javascript:void(0);" onclick="onDelete('{$one.id}')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+            </div>
+
+    </div>
+</div>
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script src="__PUBLIC__/static/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var de = $("#de_choose").val();
+        $("li[name='de']").removeClass("active");
+        $("#de_"+de).addClass("active");
+    });
+
+    //删除
+    function onDelete(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定要删除吗！","buttons":{"ok":{"action":function(){doneDel(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneDel(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/diedit/doProductionDelete')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"删除成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"删除失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+
+</script>
+
+<include file="Common:footer" />

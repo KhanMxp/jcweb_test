@@ -1,0 +1,69 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active" id="de_A" name="de"><a href="/admin/sample/allInput?de=A" >新填写</a></li>
+            <li role="presentation" class="active" id="de_B" name="de"><a href="/admin/sample/allInput?de=B" >被退回</a></li>
+            <input type="hidden" id="de_choose" value="{$de}"/>
+        </ul>
+        <p></p>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <th width="20%">订单id</th>
+            <th width="40%">受检单位</th>
+            <th >操作</th>
+            </thead>
+            <tbody>
+            <volist name="list" id="one">
+                <tr>
+                    <td >{$one.id}</td>
+                    <td >{$one.clientname}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{:U('/admin/sample/edit')}?id={$one.id}" ><i class="glyphicon glyphicon-cog"></i>修改内容</a>
+                        <a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="onDelete('{$one.id}')" ><i class="glyphicon glyphicon-trash"></i>删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+
+        </table>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+        <!-- main end-->
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var de = $("#de_choose").val();
+        $("li[name='de']").removeClass("active");
+        $("#de_"+de).addClass("active");
+    });
+
+    //删除
+    function onDelete(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定要删除吗！","buttons":{"ok":{"action":function(){doneDel(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneDel(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/sample/doSamDelete')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"删除成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"删除失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+</script>
+<include file="Common:footer" />

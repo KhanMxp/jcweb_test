@@ -1,0 +1,68 @@
+<include file="Common:head" title="前台导航栏"/>
+    <div class="picContainer">
+        <img src="{$head_image.pic_path}" alt="新闻中心">
+        <a id="fix-title" href="">新闻中心</a>
+    </div>
+    <div class="container-two" id="container-content">
+        <div class="row">
+            <div class="col-xs-2 col-md-2 left-menu">
+                <ul>
+                    <if condition="$one.type eq 0">
+                            <li><a class="sec-nav-active" href="/Home/Information/news">通知公告</a></li>
+                            <li><a class="hvr-underline-from-center" href="/Home/Information/newsIns">行业新闻</a></li>
+                        <else />
+                            <li><a class="hvr-underline-from-center" href="/Home/Information/news">通知公告</a></li>
+                            <li><a class="sec-nav-active" href="/Home/Information/newsIns">行业新闻</a></li>
+                    </if>
+                </ul>
+            </div>
+            <div class="col-xs-10 col-md-10 right-content">
+                <div class="breadcrumbs">
+                    <div class="row">
+                        <div class="col-lg-8 col-sm-8">
+                            <ol class="breadcrumb pull-left">
+                                <li>
+                                    <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                                </li>
+                                <li>
+                                    <a href="/home/Information/news">
+                                        新闻中心
+                                    </a>
+                                </li>
+                                <if condition="$one.type eq 0">
+                                    <li>
+                                        <a href="/home/Information/news">
+                                            通知公告
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span>通知详情</span>
+                                    </li>
+                                    <else />
+                                        <li>
+                                            <a href="/home/Information/newsIns">
+                                                行业新闻
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span>新闻详情</span>
+                                        </li>
+                                </if>
+                                
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="right-content-details">
+                    <div class="col-xs-12 col-md-12">
+                        <h2 class="detail-title">{$one.title}</h2>
+                        <span class="save-time">发布时间：{$one.save_time}</span>
+                        <div>
+                            <p>{$one.content}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="Common:footer"/>

@@ -1,0 +1,33 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <th width="70%">修改内容</th>
+            <th >操作</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span>左侧介绍内容</span></td>
+                <td><a class="btn btn-primary btn-xs" href="{:U('/admin/shengedit/introduction')}" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            <tr>
+                <td><span>右侧公司图片</span></td>
+                <td><a class="btn btn-primary btn-xs" href="/admin/shengedit/show.html?type=1" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            <tr>
+                <td><span>添加资质照片</span></td>
+                <td><a class="btn btn-primary btn-xs" href="/admin/shengedit/show.html?type=2" ><i class="glyphicon glyphicon-cog"></i>添加</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <!-- main end-->
+
+    </div>
+</div>
+<include file="Common:footer" />

@@ -1,0 +1,94 @@
+<include file="Common:head" title="前台导航栏"/>
+<!-- Sequence Modern Slider -->
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel"  data-interval="3000">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <php>for ($i = 1 ; $i<$num ; $i++){</php>
+        <li data-target="#myCarousel" data-slide-to="{$i}"></li>
+        <php>}</php>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <img src="{$picture['picture']}" style="width: 100%;" alt="First slide">
+        </div>
+        <volist name="image" id="one">
+            <div class="item">
+                <img src="{$one.picture}" style="width: 100%;" >
+            </div>
+        </volist>
+    </div>
+</div>
+
+
+<div class="container" >
+    <div class="index-box-about" id="guanyu">
+        <div class="box-title">
+            <span class="box-title-line"></span>
+            <h4>About us</h4>
+            <h2>关于<strong>我们</strong></h2>
+            <div class="fadeIn">{$aboutus['content']}</div>
+        </div>
+    </div>
+
+</div>
+
+<!--动态资讯-->
+<div class="container" id="zixun">
+    <div class="index-box-about">
+        <div class="box-title">
+            <span class="box-title-line"></span>
+            <h4>news</h4>
+            <h2>动态<strong>资讯</strong></h2>
+        </div>
+    </div>
+    <div class="item-left wow fadeInLeft ">
+        <div class="news-first-box ">
+            <img src="{$news_box1['information_images_path']}" alt="相关新闻" style="width: 480px;height: 270px;">
+            <div class="news-first-time">
+                <span>{$news_box1.save_time|strtotime|date=d,###}</span>
+                <p>{$news_box1.save_time|strtotime|date=Y,###}/{$news_box1.save_time|strtotime|date=m,###}</p>
+            </div>
+            <div class="news-first-text">
+                <a href="{:U('/yan/Information/informationDetail')}?type=1&id={$news_box1['id']}" ><h4 style="width:470px;text-overflow:ellipsis; white-space:nowrap; overflow:hidden; ">{$news_box1.title}</h4></a>
+            </div>
+        </div>
+        <a href="{:U('/yan/Information/informationDetail')}?type=1&id={$news_box1['id']}" ><h4 style="width:480px;text-overflow:ellipsis; white-space:nowrap; overflow:hidden; ">{$news_box1.title}</h4></a>
+        <div class="boxhidden">
+            <p style="font-size: 15px;max-height: 42.5px;">{$news_box1.content}</p>
+        </div>
+    </div>
+    <div class="item-right">
+        <section class="tab wow fadeInRight">
+            <div class="news-other-box">
+                <span class="col-sm-3"><span class="label label-primary" style=" font-size: 20px;" > 动态资讯</span></span>
+                <a href="/yan/Information/information"><span style="font-size: 14px;">More>></span></a>
+                <div>
+                    <table class="table" style="table-layout:fixed">
+                        <thead>
+                        <tr>
+                            <th width="75%"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                    <a href="{:U('/yan/Information/informationDetail')}?type=1&id={$vo['id']}"><span style="font-size: 15px;">{$vo.title}</span></a>
+                                </td>
+                                <td style="font-size: 15px;">{$vo.save_time|strtotime|date=Y年m月d日,###}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<include file="Common:footbody" />

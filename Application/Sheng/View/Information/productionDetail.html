@@ -1,0 +1,68 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/sheng/Index/index">
+                        主页
+                    </a>
+                    </li>
+                    <li>
+                        <if condition="$type eq A">
+                            <a href="/home/Information/production">
+                                高性能外延材料与器件
+                            </a>
+                            <else />
+                            <a href="/home/Information/production#waiyan">
+                                专用设备服务
+                            </a>
+                        </if>
+
+                    </li>
+                    <li class="active">
+                        详情
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container property">
+<div class="container" style="padding-right: 160px;padding-left: 160px;">
+    <div class="row" >
+        <!--<div class="col-lg-6 col-sm-6 wow fadeInLeft">
+            <div class="pf-img ">
+               <center> <img src="{$list['picture_path']}" alt="" class="img-responsive" ></center>
+            </div>
+        </div>-->
+            <div class="col-lg-12 col-sm-12 wow fadeInRight">
+                <div class="title ">
+                    <h3>产品名称：{$list.name}</h3>
+                    <hr>
+                </div>
+                <div class="pf-detail " >
+                    <p>{$list.content}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        $("pf-detail").find("img").each(function(){
+            var w = $(this).width(),
+                h = $(this).height();
+            if(w >= 880 || w == 0){
+                $(this).css({
+                    width: 880,
+                });
+            }
+        });
+    })
+
+</script>
+<include file="Common:footbody" />

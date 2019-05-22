@@ -1,0 +1,152 @@
+<div class="container" ><div class="hr"><span class="hr-inner"></span></div></div>
+<!--footer start-->
+<footer class="footer">
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-4 col-md-4 footer-info">
+            <p class="wow bounceInLeft" data-wow-duration="2s">备案号: {$footer.record}</p>
+            <p class="wow bounceInRight" data-wow-duration="2s" data-wow-delay="1">Email : {$footer.email}</p>
+          </div>
+          <div class="col-xs-4 col-md-4 footer-info">
+            <p class="wow bounceInLeft" data-wow-duration="1s" data-wow-offset="2">地址: {$footer.address}</p>
+            <p class="wow bounceInRight" data-wow-duration="1s" data-wow-delay="1" data-wow-offset="2">联系电话 : {$footer.telephone}</p>
+          </div>
+          <div class="col-xs-4 col-md-4 footer-img">
+            <img src="__PUBLIC__/picture/footerCode.png" alt="" style="width:50px;height:50px;display: block;">
+            <span class="footimg-title">官方网站</span>
+          </div>
+        </div>
+  </div>
+  <!--small footer start-->
+  <div class="footer-small">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="copyright"><p>Copyright © 2013-2018 BUPT All Rights Reserved. </p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.5&key=6cdce0833c160c7358e0700085a42ec5"></script>-->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=1f342e37b7e51d824cdcd9a940a3d37a"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/EasyBanner.js"></script>
+<script type="text/javascript" >
+    // var map = new AMap.Map('container', {
+    //     resizeEnable: true,
+    //     center: [116.59706,39.917001],
+    //     zoom: 15
+    // });
+    //地图初始化时，在地图上添加一个marker标记,鼠标点击marker可弹出自定义的信息窗体
+    var map = new AMap.Map("gaodemap", {
+        resizeEnable: true,
+        center: [116.597735,39.917448],
+        zoom: 15
+    });
+    var infoWindow = new AMap.InfoWindow({ //创建信息窗体
+        isCustom: true,  //使用自定义窗体
+        content:'<div>建材检测中心</div>', //信息窗体的内容可以是任意html片段
+        offset: new AMap.Pixel(16, -45)
+    });
+    var onMarkerClick  =  function(e) {
+        infoWindow.open(map, e.target.getPosition());//打开信息窗体
+        //e.target就是被点击的Marker
+    }
+    var marker = new AMap.Marker({
+        map: map,
+        position: [116.597735,39.917448]
+    })
+    map.add(marker);
+    marker.on('click',onMarkerClick);//绑定click事件
+
+
+
+    addMarker();
+    //添加marker标记
+    function addMarker() {
+        map.clearMap();
+        var marker = new AMap.Marker({
+            map: map,
+            position: [116.597735,39.917448]
+        });
+        //鼠标点击marker弹出自定义的信息窗体
+        AMap.event.addListener(marker, 'click', function() {
+            infoWindow.open(map, marker.getPosition());
+        });
+    }
+    //构建信息窗体中显示的内容
+    var info = [];
+    info.push("<div style=\"padding:0px 0px 0px 4px;\"><b style='color: #CF6942;font-size: 20px;'>建筑材料工业干混砂浆产品质量监督检验测试中心</b>");
+    info.push("<strong style='font-size: 16px;'>电话 :</strong> \n" + "<b style='font-size: 16px;'>010-51164723 010-51164718</b> ");
+    info.push("<div style='font-size: 16px;'><strong>地址 :</strong>北京市朝阳区管庄东里中国建材院内北楼</div></div>");
+    infoWindow = new AMap.InfoWindow({
+        content: info.join("<br/>")  //使用默认信息窗体框样式，显示信息内容
+    });
+    infoWindow.open(map, map.getCenter());
+    //关闭信息窗体
+    function closeInfoWindow() {
+        map.clearInfoWindow();
+    }
+
+</script>
+<script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/static/js/swiper.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/wow.min.js"></script>
+<script type="text/javascript">
+    new WOW().init();
+</script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      autoplay: {
+         delay: 2500,
+        //  disableOnInteraction: true,
+         
+    },
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true,
+      },
+    });
+    var swiperZJ = new Swiper('.swiper-containerZJ', {
+      direction: 'vertical',
+      slidesPerView: 'auto',
+      freeMode: true,
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //   },
+      mousewheel: true,
+    });
+    $("#lab-sence .swiper-container .swiper-wrapper .swiper-slide>img").on('mouseover', function(e){
+        
+        var $this = $(this)
+       // $(this).unbind("mousesenter,mouseleave")
+        var imgModal = $('#imgPreModal')
+        setTimeout(function(){
+            imgModal.modal('show')
+        },200)
+        var srcImg = $this[0].currentSrc
+        imgModal.find(".showPreImg")[0].src = srcImg
+        swiper.autoplay.stop()
+        imgModal.stop(true)
+    }).on('mouseout', function(e){
+        var imgModal = $('#imgPreModal')
+        swiper.autoplay.start()
+        imgModal.modal('hide')
+        imgModal.stop(true)
+    })
+</script>
+<script type="text/javascript" src="__PUBLIC__/static/js/main.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
+</body>
+</html>
+

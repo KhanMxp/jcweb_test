@@ -1,0 +1,118 @@
+<include file="Common:head" title="前台导航栏"/>
+<div class="picContainer">
+    <img src="{$head_image.pic_path}" alt="质检服务">
+    <a id="fix-title" href="">质检服务</a>
+</div>
+<div class="container-two" id="container-content" style="position: relative" }>
+    <div class="row">
+        <div class="col-xs-2 col-md-2 left-menu">
+            <ul>
+                <li><a class="hvr-underline-from-left" href="/Home/Information/process">检测流程</a></li>
+                <li><a class="hvr-underline-from-left" href="/Home/Information/scope">质检范围</a></li>
+                <li><a class="sec-nav-active" href="/Home/Information/reportQuery">报告查询</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-10 col-md-10 right-content">
+            <div class="breadcrumbs">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-8">
+                        <ol class="breadcrumb pull-left">
+                            <li>
+                                <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                            </li>
+                            <li>
+                                <a href="/Home/Information/process">质检服务</a>
+                            </li>
+                            <li>
+                                <span>报告查询</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="right-content-details">
+                <div class="col-sm-12">
+                    <label style="padding-left: 20%;" class="report-query-phone"><i class="glyphicon glyphicon-phone-alt"></i>真伪查询电话：<b style="font-weight: bold;">010-51164716</b></label>
+                </div>
+                <div class="col-xs-12 col-md-12">
+                    <form id="report-query">
+                        <!-- <div class="form-group">                                
+                            <div class="input-group">
+                                <span class="input-group-addon">受检单位</span>
+                                <input type="text" class="forma-control" placeholder="请输入受检单位" id="unit">
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">受检单位</span>
+                                    <input type="text" class="form-control" placeholder="请输入受检单位" id="unit">
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">中心编号</span>
+                                <input type="text" class="form-control" placeholder="请输入中心编号" id="code">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary glyphicon glyphicon-search" onclick="handleSubmit()">查询</button>
+                    </form>
+                    <div id="result">
+                        
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+</div>
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    function handleSubmit () {
+        var department = $("#unit").val(),
+            centerNum = $("#code").val()
+            $.ajax({
+                type:"post",
+                url:"{:U('/Home/Information/doQuery')}",
+                data:{"unit": department, "code": centerNum},
+                dataType:"json",
+                success:function(ret){
+                    if(ret.msg=='succ'){
+                    var result = $(".result")[0],
+                            downloadLink = ret.data.content;
+                    console.log('result',$(".result")[0])
+                    console.log('result=====', $(".result").append(downloadLink))
+                    $(".result").append(downloadLink)
+                    console.log('result', $(".result"))
+                    console.log("first", $(".result > a")[0])
+                    $(".result > a")[0].click()
+                    $(".result > a")[0].remove();
+                    }else{
+                        window.confirm(ret.msg)
+                }
+            }
+        });
+    }
+    function handleSubmit () {
+        var unit = $("#unit").val(),
+            code = $("#code").val();
+        console.log("unitcode", typeof unit, typeof code)
+
+        $.ajax({
+            type:"post",
+            url:"{:U('/Home/Information/doQuery')}",
+            data:{"unit": unit, "code": code},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var result = $("#result")
+                    result.children().remove()
+                    result.append('<div class="alert alert-success" role="alert">查看报告：'+ret.data.content+'</div>')
+                }else{
+                    var result = $("#result")
+                    result.children().remove()
+                    result.append('<div class="alert alert-warning" role="alert">'+ret.msg+'</div>')
+                }
+            }
+        });
+    }
+</script>
+<include file="Common:footer"/>

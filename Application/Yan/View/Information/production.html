@@ -1,0 +1,51 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/yan/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        产品及解决方案
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<!--portfolio-->
+<div class="container" id="portfolioservice">
+    <div id="portfolio" class="portfolio">
+        <div class="index-box-about">
+            <div class="box-title">
+                <span class="box-title-line"></span>
+                <h4>Our service</h4>
+                <h2>技术<strong>服务</strong></h2>
+            </div>
+        </div>
+        <div class="sap_tabs">
+            <div id="horizontalTab">
+                <volist name="data1" id="fw">
+                    <div class="col-md-3 col-sm-6 portfolio-grids">
+                        <a href="{$fw.picture_path}" data-lightbox="example-set" data-title="{$fw.content}">
+                            <img src="{$fw.thumb_path}" class="img-responsive zoom-img" alt="" />
+                            <div class="b-wrapper">
+                                <h5>{$fw.name}</h5>
+                            </div>
+                        </a>
+                    </div>
+                </volist>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//portfolio-->
+
+<include file="Common:footbody" />

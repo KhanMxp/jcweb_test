@@ -1,0 +1,75 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active" id="de_A" name="de"><a href="/admin/edit/fileDownload?de=A" >标准资料</a></li>
+            <li role="presentation" class="active" id="de_B" name="de"><a href="/admin/edit/fileDownload?de=B" >检测资料</a></li>
+            <li role="presentation" class="active" id="de_C" name="de"><a href="/admin/edit/show.html?type=5" >顶部图片</a></li>
+            <input type="hidden" id="de_choose" value="{$de}"/>
+        </ul>
+        <p></p>
+        <div>
+
+            <a class="btn btn-success btn-xs" href="{:U('/admin/edit/addFile')}?de={$de}"><i class="glyphicon glyphicon-plus"></i>新增</a><p/>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <th width="50%">
+                    <if condition="$de eq A">标准资料名称</if>
+                    <if condition="$de eq B">检测资料名称</if>
+                </th>
+                <th >操作</th>
+                </thead>
+                <tbody>
+                <volist name="list" id="one">
+                    <tr>
+                        <td >{$one.filename}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="{:U('/admin/edit/addFile')}?id={$one.id}" ><i class="glyphicon glyphicon-cog"></i>修改文件</a>
+                            <a class="btn btn-danger btn-xs" href="javascript:void(0);" onclick="onDelete('{$one.id}')" ><i class="glyphicon glyphicon-trash"></i>删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var de = $("#de_choose").val();
+        $("li[name='de']").removeClass("active");
+        $("#de_"+de).addClass("active");
+    });
+
+    //删除
+    function onDelete(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定要删除吗！","buttons":{"ok":{"action":function(){doneDel(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneDel(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/edit/doFileDelete')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"删除成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"删除失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+</script>
+
+<include file="Common:footer" />

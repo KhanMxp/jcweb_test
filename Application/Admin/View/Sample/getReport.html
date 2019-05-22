@@ -1,0 +1,73 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <th width="10%">订单id</th>
+            <th width="15%">提交人</th>
+            <th width="20%">受检单位</th>
+            <th width="20%">上次修改时间</th>
+            <th >操作</th>
+            </thead>
+            <tbody>
+            <volist name="list" id="one">
+                <tr>
+                    <td >{$one.id}</td>
+                    <td >{$one.authname}</td>
+                    <td >{$one.clientname}</td>
+                    <td>{$one.lastedit}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" href="{:U('/admin/sample/viewReport')}?id={$one.id}"><i class="glyphicon glyphicon-cog"></i>查看</a>
+                        <a class="btn btn-primary btn-xs" href="javascript:void(0);" onclick="onReport('{$one.id}')" ><i class="glyphicon glyphicon-cog"></i>确认收到报告</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+
+        </table>
+        <div class=" pull-right"><nav aria-label="Page navigation" id="pagination">{$pagination}</nav></div>
+        <!-- main end-->
+
+    </div>
+</div>
+
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var de = $("#de_choose").val();
+        $("li[name='de']").removeClass("active");
+        $("#de_"+de).addClass("active");
+    });
+
+
+    //收到报告
+    function onReport(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定已经收到报告了吗？","buttons":{"ok":{"action":function(){doneReport(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneReport(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/sample/doGetReport')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"确认成功！","action":function(){window.location.href="/admin/sample/getReport";}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"确认失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+
+</script>
+
+
+<include file="Common:footer" />

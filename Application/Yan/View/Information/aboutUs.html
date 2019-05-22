@@ -1,0 +1,86 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/yan/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        关于我们
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div class="container" >
+    <div class="index-box-about" id="guanyu">
+        <div class="box-title">
+            <span class="box-title-line"></span>
+            <h4>About us</h4>
+            <h2>关于<strong>我们</strong></h2>
+            <div class="fadeIn">{$aboutus['content']}</div>
+        </div>
+    </div>
+    <div class="index-box-about">
+        <div class="box-title">
+            <span class="box-title-line"></span>
+            <h4>Expert team</h4>
+            <h2>研究院<strong>专家团队</strong></h2>
+        </div>
+    </div>
+
+    <div class="media">
+        <hr/>
+        <volist name="experts" id="exp">
+            <div class="media-left media-middle" style="width: 30%">
+                <a href="#">
+                    <img  src="{$exp['thumb_path']}" alt="..." >
+                </a>
+            </div>
+            <div class="media-body wow fadeInDown delay-06s">
+                <h3 class="media-heading" >{$exp['name']}</h3>
+                <hr  style="border:1px #002d53 solid;"/>
+                {$exp['content']}
+            </div>
+            <hr/>
+        </volist>
+    </div>
+
+</div>
+<div class="index-box-about">
+    <div class="box-title">
+        <span class="box-title-line"></span>
+        <h4>Certificate</h4>
+        <h2>资质<strong>证书</strong></h2>
+    </div>
+</div>
+<div class="row property " style="vertical-align: middle">
+    <div class="father">
+        <volist name="list" id="xin" key="i">
+            <div class="son">
+                <img src="{$xin.pic_path}" class="img-responsive img-rounded" alt="Responsive image" style="width:269px;height: 185px;padding-bottom: 20px">
+            </div>
+        </volist>
+    </div>
+    <div class="clearfix"></div>
+    <div class="father">
+        <volist name="list1" id="zi" >
+            <div class="son">
+                <center><img src="{$zi.pic_path}" class="img-responsive img-rounded" alt="Responsive image" style="width:256px;height: 382px;padding-bottom: 20px"></center>
+            </div>
+
+        </volist>
+    </div>
+
+</div>
+</div>
+
+<include file="Common:footbody" />

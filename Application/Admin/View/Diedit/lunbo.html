@@ -1,0 +1,170 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+        <div id="TCrop">
+            <form class="form-horizontal" id="myform" action="" method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label talign-center fz13">首页轮播照片</label>
+                    <div class="col-sm-10">
+                        <input type="hidden" name="imgurl"  />
+                        <input type="file" name="file" onchange="ajaxFileUpload()" id="addfile"   />
+                        <p class="help-block" id="attachment"></p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label talign-center">&nbsp;</label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-success" onclick="onSave()">保 存</button>
+                        <button type="button" class="btn btn-success" onclick="javascript:history.go(-1);">返 回</button>
+                        <!--<a href="{:U('/admin/contract/sampleEdit')}?id={$centreno}" class="btn btn-success">返 回</a>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <th width="80%">图片</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                <volist name="lists" id="one">
+                    <tr>
+                        <td>
+                            <a href="javascript:void(0);" name="{$one.picture_name}" onclick="return Check(this);">
+                                <img src="{$one.picture}" onerror="this.src='__PUBLIC__/static/images/default-timg.gif'" class="img-responsive" style="max-width: 500px;"/>
+                            </a>
+                        </td>
+                        <td><a href="javascript:void(0);" onclick="onDelete('{$one.id}')" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<script src="__PUBLIC__/static/js/jquery.form.js"></script>
+<script src="__PUBLIC__/static/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    function ajaxFileUpload(){
+        var file = $("#addfile").val();
+        if(file){
+            $.ajaxFileUpload({
+                url: "{:U('Uploader/start2')}",
+                secureuri: false,
+                fileElementId: 'addfile',
+                dataType: 'JSON',
+                success: function (data, status) {
+                    var ret = JSON.parse(data);
+                    $("#addfile").val("");
+                    //alert(ret.url);
+                    if(ret.info=='succ'){
+                        $("input[name='imgurl']").val(ret.url);
+                        $("#attachment").html(ret.url);
+                    }else{
+                        var _options = {"text":"上传失败","flag":"error"};
+                        if(ret.info) _options.text = ret.info;
+                        doAlertDialog(_options);
+                    }
+                },
+                error: function (data, status, e){
+                    var _options = {"text":"上传失败","flag":"error"};
+                    doAlertDialog(_options);
+                }
+            });
+        }
+        return false;
+    }
+    function onFileUpload() {
+        $('#addfile').click();
+        return false;
+    }
+
+    function onSave(){
+        var options = {
+            url: "{:U('/admin/diedit/saveImage')}",
+            dataType: 'json',
+            beforeSubmit: function(){
+                return true;
+            },
+            success: function (data) {
+                if(data.msg=='succ'){
+                    var _options = {"text":"上传成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"上传失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        };
+        $("#myform").ajaxForm(options);
+        return false;
+    }
+
+    //删除图片
+    function onDelete(id){
+        if(!id) return false;
+        var _options = {"flag":"error","text":"您确定要删除吗！","buttons":{"ok":{"action":function(){doneDel(id);}},"cancel":{}}};
+        doConfirmDialog(_options);
+    }
+    function doneDel(id){
+        if(!id) return false;
+        $.ajax({
+            type:"post",
+            url:"{:U('/admin/diedit/doDelete')}",
+            data:{"id":id},
+            dataType:"json",
+            success:function(ret){
+                if(ret.msg=='succ'){
+                    var _options = {"text":"删除成功！","action":function(){window.location.reload();}};
+                    doAlertDialog(_options);
+                }else{
+                    var _options = {"text":"删除失败！"};
+                    if(data.msg) _options.text = data.msg;
+                    doAlertDialog(_options);
+                }
+            }
+        });
+    }
+
+    //点击查看原图
+    function Check(path) {
+        var url=path.name;
+        if(!url) return false;//获取缩略图url
+        var newurl=url;//重写
+        window.open(newurl);
+    }
+    //裁剪
+    $(function() {
+        Crop.init({
+            id: 'TCrop',
+            /* 上传路径 */
+            url: '',
+            /* 允许上传的图片的后缀 */
+            allowsuf: ['jpg', 'jpeg', 'png', 'gif'],
+            /* JCrop参数设置 */
+            cropParam: {
+                minSize: [50, 50],          // 选框最小尺寸
+                maxSize: [300, 300],        // 选框最大尺寸
+                allowSelect: true,          // 允许新选框
+                allowMove: true,            // 允许选框移动
+                allowResize: true,          // 允许选框缩放
+                dragEdges: true,            // 允许拖动边框
+                onChange: function(c) {},   // 选框改变时的事件，参数c={x, y, x1, y1, w, h}
+                onSelect: function(c) {}    // 选框选定时的事件，参数c={x, y, x1, y1, w, h}
+            },
+            /* 是否进行裁剪，不裁剪则按原图上传，默认进行裁剪 */
+            isCrop: true,
+            /* 图片上传完成之后的回调，无论是否成功上传 */
+            onComplete: function(data) {
+                console.log('upload complete!');
+            }
+        });
+    });
+</script>
+<include file="Common:footer" />

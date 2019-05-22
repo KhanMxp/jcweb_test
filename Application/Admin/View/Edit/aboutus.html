@@ -1,0 +1,37 @@
+<include file="Common:header" title="后台首页"/>
+<div id="page-wrapper">
+    <include file="Common:breadcrumb" />
+    <div id="page-inner" class="container">
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <th width="70%">修改内容</th>
+            <th >操作</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span>顶部图片</span></td>
+                <td><a class="btn btn-primary btn-xs" href="/admin/edit/show.html?type=1" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            <tr>
+                <td><span>中心概况</span></td>
+                <td><a class="btn btn-primary btn-xs" href="{:U('/admin/edit/introduction')}?type=1" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            <tr>
+                <td><span>机构设置</span></td>
+                <td><a class="btn btn-primary btn-xs" href="{:U('/admin/edit/introduction')}?type=2" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            <tr>
+                <td><span>资质证书</span></td>
+                <td><a class="btn btn-primary btn-xs" href="{:U('/admin/edit/introduction')}?type=3" ><i class="glyphicon glyphicon-cog"></i>修改</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <!-- main end-->
+
+    </div>
+</div>
+<include file="Common:footer" />

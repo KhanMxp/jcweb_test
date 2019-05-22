@@ -1,0 +1,70 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/sheng/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        招贤纳士
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<!--container start-->
+<div class="container" >
+    <div class="detail-box-about">
+        <div class="box-title">
+            <h2>招贤<strong>纳士</strong></h2>
+            <span class="box-title-line"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class=" col-md-6 wow zoomIn"  style="text-align: center;padding: 50px 20px 30px; background-color: #f8f8f8;height: 500px;" data-wow-duration="1s" data-wow-delay=".3s">
+            <img src="__PUBLIC__/shengrui/zhaomu.png" style="width: auto;max-height: 400px;">
+        </div>
+        <div class="col-md-6 wow zoomIn" style="padding: 50px 20px 30px;background-color: #f8f8f8;height: 500px;" data-wow-duration="1s" data-wow-delay=".3s">
+            <div class="col-md-2"></div>
+            <div class="col-md-10" style="padding: 50px 0 ">
+                {$one.content}
+            </div>
+            <div class="col-md-2"></div>
+
+        </div>
+    </div>
+</div>
+<if condition="$bopic">
+    <div class="container">
+        <div class="detail-box-about">
+            <div class="box-title">
+                <h2>团队<strong>建设</strong></h2>
+                <span class="box-title-line"></span>
+            </div>
+        </div>
+        <div class="row" >
+            <volist name="bopic" id="xt">
+                <div class="col-md-3 col-xs-3">
+                    <center><img src="{$xt.thumb_path}" class="img-responsive img-rounded"  style="width:auto;max-height: 270px;"></center>
+                </div>
+            </volist>
+
+        </div>
+    </div>
+    </div>
+</if>
+
+
+
+
+<!--container end-->
+<include file="Common:footbody" />

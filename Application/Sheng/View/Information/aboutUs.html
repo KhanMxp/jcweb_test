@@ -1,0 +1,81 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/sheng/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        关于我们
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div class="container">
+<div class="box-title">
+    <h2>关于<strong>我们</strong></h2>
+    <span class="box-title-line"></span>
+    <p class="wow fadeIn" data-wow-duration="2s" data-wow-delay=".3s">{$one['content']}
+    </p>
+</div>
+</div>
+<div class="container">
+    <div class="box-title">
+        <h2>资质<strong>证书</strong></h2>
+        <span class="box-title-line"></span>
+    </div>
+    <div class="row property " style="vertical-align: middle">
+        <div class="father">
+            <volist name="list" id="xin" key="i">
+                <div class="son">
+                    <img src="{$xin.pic_path}" class="img-responsive img-rounded" alt="Responsive image" style="width:269px;height: 185px;padding-bottom: 20px">
+                </div>
+            </volist>
+        </div>
+        <div class="clearfix"></div>
+        <div class="father">
+            <volist name="list1" id="zi" >
+                <div class="son">
+                    <center><img src="{$zi.pic_path}" class="img-responsive img-rounded" alt="Responsive image" style="width:256px;height: 382px;padding-bottom: 20px"></center>
+                </div>
+
+            </volist>
+        </div>
+
+    </div>
+</div>
+<!--<div id="page-inner" class="container" >
+    <h1 style="text-align: center;letter-spacing: 7px;line-height: 34px;font-size: 34px">关于我们</h1>
+    <hr />
+</div>
+
+<div class="container">
+    <div class="row property">
+        <div class="col-lg-6 col-sm-6 wow fadeInLeft">
+            {$one.content}
+        </div>
+       <div class="col-lg-6 col-sm-6 wow fadeInRight">
+            <img src="{$one['pic_path']}" style="max-width: 100%;max-height: 700px;">
+        </div>
+    </div>
+    <div class="row property">
+
+            <volist name="list" id="xin">
+                <div class="col-md-3" style="padding-bottom: 20px;">
+                    <img src="{$xin.pic_path}" class="img-responsive img-rounded" alt="Responsive image">
+                </div>
+            </volist>
+
+    </div>
+</div>-->
+
+<include file="Common:footbody" />

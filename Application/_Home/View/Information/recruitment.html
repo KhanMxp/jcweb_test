@@ -1,0 +1,88 @@
+<include file="Common:head" title="前台导航栏"/>
+<!--breadcrumbs start-->
+<div class="breadcrumbs" style="margin-top: 0px;padding-top: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-8">
+                <ol class="breadcrumb pull-left">
+                    <li>
+                        <i class="glyphicon glyphicon-home"></i><a href="/home/Index/index">
+                        主页
+                    </a>
+                    </li>
+
+                    <li class="active">
+                        招贤纳士
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<!--container start-->
+<div class="container" >
+    <div class="titlename" >
+        <h3 name="recruitment">招贤纳士</h3>
+        <span class="line1"></span>
+    </div>
+
+    <div class="row">
+        <div class=" col-sm-6 wow zoomIn"  style="text-align: center;padding: 50px 20px 30px; background-color: #f8f8f8;height: 500px;" data-wow-duration="1s" data-wow-delay=".3s">
+            <img src="__PUBLIC__/static/images/jiaru.png" style="width: 400px;height: 400px;">
+        </div>
+        <div class="col-sm-6 wow zoomIn" style="padding: 50px 20px 30px;background-color: #f8f8f8;height: 500px;" data-wow-duration="1s" data-wow-delay=".3s">
+            <div class="col-md-1"></div>
+            <div class="col-md-11" style="padding: 50px 0 ">
+                {$one.content}
+            </div>
+
+        </div>
+    </div>
+</div>
+<if condition="$bopic">
+<div class="container">
+<div class="titlename" >
+       <h3 name="yuangong">团队建设</h3>
+    <span class="line1"></span>
+</div>
+</div>
+<div class="container">
+    <div class="row" >
+            <volist name="bopic" id="xt">
+                <div class="col-md-3 col-xs-3">
+                    <center><img src="{$xt.thumb_path}" class="img-responsive img-rounded"  style="width:auto;max-height: 270px;"></center>
+                </div>
+            </volist>
+
+        </div>
+    </div>
+    <!-- carousel -->
+    <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <volist name="bopic" id="xt">
+                <li data-target="#carousel-example-generic" data-slide-to="{$i-1}" class="<if condition="$i eq 1 ">active</if>"></li>
+            </volist>
+        </ol>
+        <div class="carousel-inner">
+            <volist name="bopic" id="xt">
+                <div class='item <if condition="$i eq 1 ">active</if>'>
+                    <center><a href="/home/Information/pictureDetail"><img src="{$xt.thumb_path}" alt="" style="max-height: 540px;width: auto;"/></a></center>
+                </div>
+            </volist>
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+</div>-->
+</div>
+  </if>  <!-- /.carousel -->
+        <!-- End row -->
+
+
+
+<!--container end-->
+<include file="Common:footbody" />

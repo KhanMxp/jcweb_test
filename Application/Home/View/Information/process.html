@@ -1,0 +1,45 @@
+<include file="Common:head" title="前台导航栏"/>
+<div class="picContainer">
+    <img src="{$head_image.pic_path}" alt="质检服务">
+    <a id="fix-title" href="">质检服务</a>
+</div>
+<div class="container-two" id="container-content" style="position: relative" }>
+    <div class="row">
+        <div class="col-xs-2 col-md-2 left-menu">
+            <ul>
+                <li><a class="sec-nav-active" href="/Home/Information/process">检测流程</a></li>
+                <li><a class="hvr-underline-from-center" href="/Home/Information/scope">质检范围</a></li>
+                <li><a class="hvr-underline-from-center" href="/Home/Information/reportQuery">报告查询</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-10 col-md-10 right-content">
+            <div class="breadcrumbs">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-8">
+                        <ol class="breadcrumb pull-left">
+                            <li>
+                                <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                            </li>
+                            <li>
+                                <a href="/Home/Information/process">质检服务</a>
+                            </li>
+                            <li>
+                                <span>检测流程</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="right-content-details">
+                <div class="col-xs-12 col-md-12">
+                    <h3>{$process.name}</h3>
+                    <p> 发布时间：{$process.save_time}</p>
+                    <div>
+                        {$process.content}
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+</div>
+<include file="Common:footer"/>

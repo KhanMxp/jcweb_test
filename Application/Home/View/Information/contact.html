@@ -1,0 +1,55 @@
+<include file="Common:head" title="前台导航栏"/>
+<div class="picContainer">
+    <img src="{$head_image.pic_path}" alt="联系我们">
+    <a id="fix-title" href="">联系我们</a>
+</div>
+<div class="container-two" id="container-content" style="position: relative" }>
+
+    <div class="row">
+        <div class="col-xs-2 col-md-2 left-menu">
+            <ul>
+                <li><a href="/Home/Information/contact">联系我们</a></li>
+            </ul>
+        </div>
+
+    <div class="col-xs-10 col-md-10 right-content .right-content }">
+        <div class="breadcrumbs">
+            <div class="row">
+                <div class="col-lg-8 col-sm-8">
+                    <ol class="breadcrumb pull-left">
+                        <li>
+                            <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">
+                            主页</a>
+                        </li>
+                        <li>
+                            <span>联系我们</span>
+                        </li>
+                    </ol>
+                </div>
+                <div class="row" id="right-content-details">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="caption">
+                            <!--<h3>联系我们</h3>-->
+                            <p>地址: {$contact.address}</p><br/>
+                            <p>电话/传真: {$contact.phonenumber}</p><br/>
+                            <p>真伪电话查询: {$contact.consult_phone}</p><br/>
+                            <p>E-mail: {$contact.email}</p><br/>
+                        </div>
+                    </div>
+            </div>
+                <div style="background-color:#f9f9f3 ">
+                    <div class=" container" align="center" style="padding: 30px 30px;">
+                        <div class="gray-bg" style="background-color:#F9F9F3; ">
+                            <div id="gaodemap" style="height: 500px;width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+</div>
+
+<include file="Common:footer"/>
+

@@ -1,0 +1,75 @@
+<include file="Common:head" title="前台导航栏"/>
+    <div class="picContainer">
+        <img src="{$head_image.pic_path}" alt="新闻中心">
+        <a id="fix-title" href="">标准化工作</a>
+    </div>
+    <div class="container-two" id="container-content">
+        <div class="row">
+            <div class="col-xs-2 col-md-2 left-menu">
+                <ul>
+                    <if condition="$one.type eq 0">
+                        <li><a class="sec-nav-active" href="/home/Information/standard">标准立项</a></li>
+                        <li><a class="hvr-float-shadow" href="/home/Information/standardPub">标准发布</a></li>
+                        <li><a class="hvr-float-shadow" href="/home/Information/standardDyn">标准动态</a></li>
+                        <elseif condition="$one.type eq 1" />
+                            <li><a class="hvr-float-shadow" href="/home/Information/standard">标准立项</a></li>
+                            <li><a class="sec-nav-active" href="/home/Information/standardPub">标准发布</a></li>
+                            <li><a class="hvr-float-shadow" href="/home/Information/standardDyn">标准动态</a></li>
+                        <else />
+                            <li><a class="hvr-float-shadow" href="/home/Information/standard">标准立项</a></li>
+                            <li><a class="hvr-float-shadow" href="/home/Information/standardPub">标准发布</a></li>
+                            <li><a class="sec-nav-active" href="/home/Information/standardDyn">标准动态</a></li>
+                    </if>
+                </ul>
+            </div>
+            <div class="col-xs-10 col-md-10 right-content">
+                <div class="breadcrumbs">
+                    <div class="row">
+                        <div class="col-lg-8 col-sm-8">
+                            <ol class="breadcrumb pull-left">
+                                <li>
+                                    <i class="glyphicon glyphicon-home"></i><a href="/Home/Index/index">主页</a>
+                                </li>
+                                <li>
+                                    <a href="/home/Information/standard">
+                                        标准化工作
+                                    </a>
+                                </li>
+                                <if condition="$one.type eq 0">
+                                    <li>
+                                        <a href="/home/Information/standard">
+                                            标准立项
+                                        </a>
+                                    </li>
+                                    <elseif condition="$one.type eq 1" />
+                                        <li>
+                                            <a href="/home/Information/standardPub">
+                                                标准发布
+                                            </a>
+                                        </li>
+                                    <else />
+                                        <li>
+                                            <a href="/home/Information/standardDyn">
+                                                标准动态
+                                            </a>
+                                        </li>
+                                </if>
+                                <li>
+                                    <span>详情</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="right-content-details">
+                    <div class="col-xs-12 col-md-12">
+                        <h2>{$one.title}</h2>
+                        <div>
+                            <p>{$one.content}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="Common:footer"/>
