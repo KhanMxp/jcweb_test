@@ -1,24 +1,60 @@
 <div class="container" ><div class="hr"><span class="hr-inner"></span></div></div>
 <!--footer start-->
-<footer class="footer">
-  <div class="container">
-      <div class="row">
-          <div class="col-xs-4 col-md-4 footer-info">
-            <p class="wow bounceInLeft" data-wow-duration="2s">备案号: {$footer.record}</p>
-            <p class="wow bounceInRight" data-wow-duration="2s" data-wow-delay="1">Email : {$footer.email}</p>
-          </div>
-          <div class="col-xs-4 col-md-4 footer-info">
-            <p class="wow bounceInLeft" data-wow-duration="1s" data-wow-offset="2">地址: {$footer.address}</p>
-            <p class="wow bounceInRight" data-wow-duration="1s" data-wow-delay="1" data-wow-offset="2">联系电话 : {$footer.telephone}</p>
-          </div>
-          <div class="col-xs-4 col-md-4 footer-img">
-            <img src="__PUBLIC__/picture/footerCode.png" alt="" style="width:50px;height:50px;display: block;">
-            <span class="footimg-title">官方网站</span>
-          </div>
+<div class="container-fluid" id="footer-container">
+    <footer class="footer">
+        <div class="row">
+            <div class="col-md-9">
+                <ul class="footer-ul-title">
+                    <li><a href="/Home/Information/introduction">中心简介</a></li>
+                    <li><a href="/Home/Information/news">新闻中心</a></li>
+                    <li><a href="/Home/Information/process">质检服务</a></li>
+                    <li><a href="/Home/Information/standard">标准化工作</a></li>
+                    <li><a href="/Home/Information/file">资料下载</a></li>
+                </ul>
+                <ul class="footer-ul-second">
+                    <li><a href="/Home/Information/introduction">中心概况</a></li>
+                    <li><a href="/Home/Information/news">通知公告</a></li>
+                    <li><a href="/Home/Information/process">检测流程</a></li>
+                    <li><a href="/Home/Information/standard">标准立项</a></li>
+                    <li><a href="/Home/Information/file">检测资料</a></li>
+                </ul>
+                <ul class="footer-ul-second">
+                    <li><a href="/Home/Information/structure">机构设置</a></li>
+                    <li><a href="/Home/Information/newsIns">行业新闻</a></li>
+                    <li><a href="/Home/Information/scope">质检范围</a></li>
+                    <li><a href="/Home/Information/standardPub">标准发布</a></li>
+                    <li><a href="/Home/Information/fileSta">标准资料</a></li>
+                </ul>
+                <ul class="footer-ul-second">
+                    <li><a href="/Home/Information/certificate">资质证书</a></li>
+                    <li></li>
+                    <li><a href="/Home/Information/reportQuery">报告查询</a></li>
+                    <li><a href="/Home/Information/standardDyn">标准动态</a></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col-md-3 qr-code-warp">
+                <img id="qr-code" src="__PUBLIC__/picture/footerCode.png" alt="">
+                <span>官方网站</span>
+            </div>
         </div>
-  </div>
+        <div class="row footer-info">
+            <div class="col-md-12">
+                <ul>
+                    <li><a>备案号：{$footer.record}</a></li>
+                    <li><a>地址：{$footer.address}</a></li>
+                    <li><a>Email：{$footer.email}</a></li>
+                    <li><a>联系电话：{$footer.telephone}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <div class="copyright"><p>Copyright © 2013-2018 BUPT All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+</div>
   <!--small footer start-->
-  <div class="footer-small">
+  <!-- <div class="footer-small">
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-xs-12">
@@ -27,8 +63,7 @@
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </div> -->
 <!--<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.5&key=6cdce0833c160c7358e0700085a42ec5"></script>-->
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=1f342e37b7e51d824cdcd9a940a3d37a"></script>
 <script type="text/javascript" src="__PUBLIC__/static/js/common.js"></script>
@@ -103,10 +138,9 @@
       effect: 'coverflow',
       grabCursor: true,
       autoplay: {
-         delay: 2500,
-        //  disableOnInteraction: true,
-         
-    },
+         delay: 2500,         
+      },
+      loop: true,
       centeredSlides: true,
       slidesPerView: 'auto',
       coverflowEffect: {
@@ -117,6 +151,22 @@
         slideShadows : true,
       },
     });
+    var swiperNews = new Swiper('.swiper-container-news', {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+         delay: 2500,      
+        },
+        loop: true,
+        loopFillGroupWithBlank: true,
+        
+        // pagination: {
+        //     el: '.swiper-pagination',
+        //     clickable: true,
+        // },
+    });
+
     var swiperZJ = new Swiper('.swiper-containerZJ', {
       direction: 'vertical',
       slidesPerView: 'auto',
@@ -126,6 +176,7 @@
     //   },
       mousewheel: true,
     });
+
     $("#lab-sence .swiper-container .swiper-wrapper .swiper-slide>img").on('mouseover', function(e){
         
         var $this = $(this)
