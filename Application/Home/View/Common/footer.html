@@ -160,21 +160,23 @@
         },
         loop: true,
         loopFillGroupWithBlank: true,
-        
-        // pagination: {
-        //     el: '.swiper-pagination',
-        //     clickable: true,
-        // },
     });
 
-    var swiperZJ = new Swiper('.swiper-containerZJ', {
-      direction: 'vertical',
-      slidesPerView: 'auto',
-      freeMode: true,
-    //   scrollbar: {
-    //     el: '.swiper-scrollbar',
-    //   },
-      mousewheel: true,
+    var swiperIndex = new Swiper('.swiper-container-index', {
+        effect : 'fade',
+        autoplay: {
+         delay: 2500,      
+        },
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'progressbar',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
     });
 
     $("#lab-sence .swiper-container .swiper-wrapper .swiper-slide>img").on('mouseover', function(e){
@@ -183,7 +185,7 @@
        // $(this).unbind("mousesenter,mouseleave")
         var imgModal = $('#imgPreModal')
         setTimeout(function(){
-            imgModal.modal('show')
+            // imgModal.modal('show')
         },200)
         var srcImg = $this[0].currentSrc
         imgModal.find(".showPreImg")[0].src = srcImg

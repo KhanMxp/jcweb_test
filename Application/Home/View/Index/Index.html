@@ -1,34 +1,20 @@
 <include file="Common:head" title="前台导航栏"/>
 <!-- 轮播图 -->
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <foreach name="image" item="vo">
-            <li style="margin-right: 5px;padding-right: 20px;" data-target="#carousel-example-generic" data-slide-to="{$key}"></li>
-        </foreach>
-    </ol>
-  
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <foreach name="image" item="vo" key="k">
-          <if condition="$k eq 0">
-            <div class="item active">
+<div class="swiper-container-index">
+    <div class="swiper-wrapper">
+        <foreach name="image" item="vo" key="k">
+            <div class="swiper-slide">
                 <img src="{$vo.picture}" alt="轮播图">
                 <div class="carousel-caption">
                 </div>
             </div>
-            <else />
-                <div class="item">
-                    <img src="{$vo.picture}" alt="轮播图">
-                    <div class="carousel-caption">
-                    </div>
-                </div>
-          </if>
-        
-      </foreach>
+        </foreach>
     </div>
+    <div class="swiper-pagination"></div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
 </div>
-
 <!-- 内容区域 -->
 <div class="container-fluid" id="content-area">
     <div class="row">
@@ -163,7 +149,7 @@
     </div>
 </div>
 <!-- 实验室风采 -->
-<div class="container-fluid" id="lab-sence">
+<div class="container-fluid" id="lab-sence" style="z-index:-1;">
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="infomation-title">
@@ -174,7 +160,7 @@
                 <div class="swiper-wrapper">
                     <foreach name="lab_picture" item="vo">
                         <div class="swiper-slide" style="width: 300px; height: 200px; background-size: cover;">
-                            <img style="width: 300px; height: 200px; background-size: cover;" src="{$vo.information_pic_path}" type="button" data-toggle="modal" data-target="#imgPreModal" data-whatever="{$vo.pic_path}" alt="..." onerror="onerror=null;src='__PUBLIC__/picture/logoo.png'" />                
+                            <img style="width: 300px; height: 200px; background-size: cover;z-index: -1;" src="{$vo.information_pic_path}" type="button" data-toggle="modal" data-target="#imgPreModal" data-whatever="{$vo.pic_path}" alt="..." onerror="onerror=null;src='__PUBLIC__/picture/logoo.png'" />               
                         </div>
                     </foreach>
                 </div>
@@ -194,7 +180,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <img style="width: 600px; height: 400px; display: inline-block; margin: 0 auto;" class="showPreImg" src="" />
+                        <img style="width: 600px; height: 400px; display: inline-block; margin: 0 auto;z-index: 500;" class="showPreImg" src="" />
                     </div>
                 </div>
             </div>
@@ -252,151 +238,48 @@
         window.location.href="/Admin"
     }
 
-    /* 前端验证码 */
-//     var createVeritification = function(){
-// 	var GLOBAL_CHAR_NUM = 4;
-// 	var GLOBAL_CHAR_STRING = "";
-// 	var GLOBAL_COLOR_SET = [
-// 		"#AAAAAA", "#888888", "#666666", "#444444", "#000000",
-// 		"#FF44AA", "#FF0088", "#C10066", "#A20055", "#8C0044",
-// 		"#FF3333", "#FF0000", "#CC0000", "#AA0000", "#880000",
-// 		"#FF7744", "#FF5511", "#E63F00", "#C63300", "#A42D00",
-// 		"#33FFAA", "#00FF99", "#00DD77", "#00AA55", "#008844",
-// 		"#5599FF", "#0066FF", "#0044BB", "#003C9D", "#003377",
-// 		"#5555FF", "#0000FF", "#0000CC", "#0000AA", "#000088",
-// 		"#7744FF", "#5500FF", "#4400CC", "#2200AA", "#220088",
-// 		"#9955FF", "#7700FF", "#5500DD", "#4400B3", "#3A0088",
-// 		"#B94FFF", "#9900FF", "#7700BB", "#66009D", "#550088",
-// 		"#E93EFF", "#CC00FF", "#A500CC", "#7A0099", "#660077",
-// 		"#FF3EFF", "#FF00FF", "#CC00CC", "#990099", "#770077"
-// 	];
+    window.addEventListener('scroll', function() {
+        var clientHeight = document.documentElement.clientHeight;
+        console.log('clientHeight', clientHeight)
+        var scrollTop = $(window).scrollTop()
+        console.log('scrollTop', scrollTop)
+        var featureTop = $("#lab-sence img").offset().top;
+        console.log('featureTop', featureTop)
+    })
 
-// 	var chars = [];
-// 	var ctx = undefined;
-// 	var timer = undefined;
-// 	var canvasWidth = 1000;
-// 	var canvasHeight = 500;
+	$('#lab-sence img').mouseover(function(e){
+        var tooltip = "<div id='tooltip'><img src='"+ this.src +"' alt='产品预览图' style='width:600px;height:400px;z-index:-3;'/></div>";
+        $("body").append(tooltip);
 
-// 	// 获取canvas 上下文环境
-// 	var getContext = function(){
-// 		var canvas = document.getElementById("canvas");
-// 		ctx =canvas.getContext("2d");
-// 		canvasWidth = canvas.width;
-// 		canvasHeight = canvas.height;
-// 		return ctx;
-// 	};
+        // 获取三个高度
+        var scrollTop = document.documentElement.scrollTop;
+        var clientHeight = document.documentElement.clientHeight;
+        var featureTop = $("#lab-sence img").offset().top;
 
-// 	// 获取单个字符, 字符范围 0-9 A-Z a-z 
-// 	var getChar = function(){
-// 		var char = '';
-// 		// 返回 0- 61之间的整数
-// 		var seed = Math.floor(Math.random()*62);
+        console.log('clientHeight', clientHeight)
+        console.log('scrollTop', scrollTop)
+        console.log('featureTop', featureTop)
 
-// 		if(seed < 10)			// seed 在 0- 9之间,字符为数字
-// 			char = Math.floor(Math.random()*10);
-// 		else if(seed < 36)	// seed 在10-35之间,字符为大写字母
-// 			char = String.fromCharCode(Math.floor(Math.random()*25.99)+65);
-// 		else if(seed < 62)	// seed 在36-62之间,字符为小写字母
-// 			char = String.fromCharCode(Math.floor(Math.random()*25.99)+97);
-// 		return char;
-// 	};
-
-// 	// 将单个字符封装为对象
-// 	var getPackageChars = function(){
-// 		for(var i=0; i<GLOBAL_CHAR_NUM; i++){
-// 			chars[i] = {
-// 				"x": canvasWidth/GLOBAL_CHAR_NUM*i,
-// 				"y": canvasHeight/10*7,
-// 				"size": Math.floor(((canvasWidth/GLOBAL_CHAR_NUM > canvasHeight)?
-// 					canvasHeight:canvasWidth)*8/10),
-// 				"char": getChar(),
-// 				"color": GLOBAL_COLOR_SET[Math.floor(Math.random()*(GLOBAL_COLOR_SET.length-0.01))]
-// 			};
-// 			// 字符位置移动控制 bar
-// 			chars[i].posCtrl = (i%2 == 0)? -1: 1;
-// 		}
-// 		return chars;
-// 	};
-
-// 	// 检测验证码是否正确
-// 	var veritificate = function(code){
-// 		var txt = "";
-// 		for(var i=0;i<GLOBAL_CHAR_NUM;i++)
-// 			txt += chars[i].char;
-// 		return txt.toUpperCase() == code.toUpperCase();
-// 	};
-
-// 	// 绘制字符
-// 	var draw = function(){
-// 		// 清空 画布
-// 		ctx.clearRect(0,0,canvasWidth,canvasHeight);
-// 		// 绘制 浅灰色背景
-// 		ctx.fillStyle = "#eee";
-// 		ctx.fillRect(0, 0, canvasWidth, canvasHeight );
-// 		// 绘制 字符
-// 		// ctx.font="72px Microsoft YaHei";
-// 		ctx.font="84px Georgia";
-// 		for(var i=0;i<GLOBAL_CHAR_NUM;i++){
-// 			ctx.strokeStyle = chars[i].color;
-// 			ctx.strokeText(chars[i].char,chars[i].x,chars[i].y);
-// 		}
-// 	};
-
-// 	// 字体动画效果
-// 	var animation = function(){
-// 		// 初始化 timer
-// 		clearInterval(timer);
-
-// 		timer = setInterval(function(){
-// 			// 动态改变字符位置
-// 			for(var i=0;i<GLOBAL_CHAR_NUM;i++){
-// 				chars[i].y += chars[i].posCtrl;
-// 					if(chars[i].y < canvasHeight * 5/10 || chars[i].y > canvasHeight * 9/10)
-// 						chars[i].posCtrl = -chars[i].posCtrl;
-// 			}
-// 			// 重绘字符
-// 			draw();
-// 		},50);
-// 	};
-
-// 	// 创建静态字体 canvas
-// 	var createStatic = function(){
-// 		console.log(getContext());
-// 		console.log(getPackageChars());
-// 		draw();
-// 	};
-
-// 	// 创建动画字体 canvas
-// 	var createAnimation = function(){
-// 		getContext();
-// 		getPackageChars();
-// 		animation();
-// 	};
-
-// 	return{
-// 		"createStatic": createStatic,
-// 		"createAnimation": createAnimation,
-// 		"veritificate": veritificate
-// 	}
-// };
-
-
-// var test = new createVeritification();
-// test.createAnimation();
-// // test.createStatic();
-
-// // 点击刷新验证码
-// var toggleVeritification = function(){
-// 	test.createAnimation();
-// };
-
-// // 验证输入是否正确
-// var checkCode = function(){
-// 	// do sth...
-//     if(test.veritificate(document.getElementById("code").value)){
-//         return true
-//     }
-// };
+        if((featureTop - scrollTop)>(clientHeight/2)){
+            console.log("元素在下半部")
+            $("#tooltip").show("fast");
+        }else{
+            console.log('元素在上半部')
+            $("#tooltip")
+                .css({
+                    "top": (e.pageY) + "px",
+                    "left":  (e.pageX)  + "px"
+                }).show("fast");
+        }
+    }).mouseout(function(){ 
+        $("#tooltip").remove();	 //移除 
+    }).mousemove(function(e){
+        $("#tooltip")
+            .css({
+                "top": (e.pageY) + "px",
+                "left":  (e.pageX)  + "px"
+            });
+    });
 </script>
 <include file="Common:footer"/>
 

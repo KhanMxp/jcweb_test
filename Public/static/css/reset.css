@@ -53,7 +53,7 @@ a:focus {
     outline: none;
 }
 a:hover{
-    color: rgb(29,75,161)
+    color: rgb(0, 116, 228);
 }
 ::selection {
     background: #337ab7;
@@ -308,6 +308,10 @@ hr{
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+}
+#content-area .information-news .list-group .list-group-item .list-left-date,
+#content-area .standard-word .list-group .list-group-item .list-left-date{
+    color: #797979;
 }
 @media screen and (max-width:1845px){
     #content-area .information-news .list-group .list-group-item .list-left-title{
@@ -592,6 +596,16 @@ hr{
     height: 400px;
     width: 100%;
 }
+#tooltip{
+    position:absolute;
+    top: 0;
+    left: 0;
+	border:1px solid #ccc;
+	background:#333;
+	padding:2px;
+	display:none;
+	color:#fff;
+}
 .modal{
     display: none;
     overflow: hidden;
@@ -623,6 +637,35 @@ hr{
 .swiper-container-news{
     height: 202px;
 }
+.swiper-container-index{
+    margin-top: 96px;
+    height: 555px;
+    width: 100%;
+}
+.swiper-container-index img{
+    display: inline-block;
+    width: 100%;
+    height: 550px;
+}
+.swiper-container-horizontal>.swiper-pagination-progressbar{
+    top: 646px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 500;
+}
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: calc(50% - 100px);
+    width: 27px;
+    height: 44px;
+    margin-top: -22px;
+    z-index: 500;
+    cursor: pointer;
+    background-size: 27px 44px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -642,9 +685,9 @@ hr{
     align-items: center;
     transition: 300ms;
   }
-  .swiper-slide:hover{
+  /* .swiper-slide:hover{
       border: 1px solid #1E50AE;
-  }
+  } */
 /* 二级页面title */
 .picContainer{
     position: relative;
