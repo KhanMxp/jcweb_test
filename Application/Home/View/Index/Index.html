@@ -168,7 +168,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="imgPreModal" role="dialog" data-backdrop="false" aria-labelledby="imgPreModalLabel">
+<!-- <div class="modal fade" id="imgPreModal" role="dialog" data-backdrop="false" aria-labelledby="imgPreModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <script type="text/javascript" src="__PUBLIC__/static/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     function handleSearch(){
@@ -248,9 +248,49 @@
     })
 
 	$('#lab-sence img').mouseover(function(e){
-        var tooltip = "<div id='tooltip'><img src='"+ this.src +"' alt='产品预览图' style='width:600px;height:400px;z-index:-3;'/></div>";
-        $("body").append(tooltip);
+        var tooltip = "<div id='tooltip'><img src='"+ this.src +"' alt='风采预览' style='display:block;width:600px;height:400px;'/></div>";
+        console.log(this)
+        $('#lab-sence').append(tooltip);
 
+        // 获取三个高度
+        var scrollTop = document.documentElement.scrollTop;
+        var clientHeight = document.documentElement.clientHeight;
+        var featureTop = $("#lab-sence img").offset().top;
+
+        var x = e.offsetX;
+        var y = e.offsetY;
+        console.log('x', x)
+        console.log('y', y)
+
+        console.log('clientHeight', clientHeight)
+        console.log('scrollTop', scrollTop)
+        console.log('featureTop', featureTop)
+
+        if((featureTop - scrollTop)>(clientHeight/2)){
+            console.log("元素在下半部")
+            console.log($("#tooltip")
+                .css({
+                    "top":(e.pageY - 400) + "px",
+                    "left":(e.pageX - 600) + "px"
+                }))
+            $("#tooltip") .css({
+                    "top":(e.pageY - 400) + "px",
+                    "left":(e.pageX - 600) + "px",
+                    "z-index": 999
+                }).show("fast");
+        }else{
+            console.log('元素在上半部')
+            $("#tooltip")
+                .css({
+                    "top": (e.pageY) + "px",
+                    "left":  (e.pageX)  + "px",
+                    "z-index": 999
+                }).show("fast");
+        }
+    }).mouseout(function(){ 
+        $("#tooltip").remove();  //移除 
+    })
+    $('#lab-sence img').mousemove(function(e){
         // 获取三个高度
         var scrollTop = document.documentElement.scrollTop;
         var clientHeight = document.documentElement.clientHeight;
@@ -262,24 +302,21 @@
 
         if((featureTop - scrollTop)>(clientHeight/2)){
             console.log("元素在下半部")
-            $("#tooltip").show("fast");
+            $("#tooltip") .css({
+                    "top":(e.pageY - 400 - 30) + "px",
+                    "left":(e.pageX - 600 - 30) + "px",
+                    "z-index": 999
+                }).show("fast");
         }else{
             console.log('元素在上半部')
             $("#tooltip")
                 .css({
-                    "top": (e.pageY) + "px",
-                    "left":  (e.pageX)  + "px"
+                    "top": (e.pageY + 30) + "px",
+                    "left":  (e.pageX + 30)  + "px",
+                    "z-index": 999
                 }).show("fast");
         }
-    }).mouseout(function(){ 
-        $("#tooltip").remove();	 //移除 
-    }).mousemove(function(e){
-        $("#tooltip")
-            .css({
-                "top": (e.pageY) + "px",
-                "left":  (e.pageX)  + "px"
-            });
-    });
+    })
 </script>
 <include file="Common:footer"/>
 

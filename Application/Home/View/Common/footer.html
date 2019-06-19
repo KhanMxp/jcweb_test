@@ -183,19 +183,19 @@
         
         var $this = $(this)
        // $(this).unbind("mousesenter,mouseleave")
-        var imgModal = $('#imgPreModal')
-        setTimeout(function(){
-            // imgModal.modal('show')
-        },200)
-        var srcImg = $this[0].currentSrc
-        imgModal.find(".showPreImg")[0].src = srcImg
+        // var imgModal = $('#imgPreModal')
+        // setTimeout(function(){
+        //     // imgModal.modal('show')
+        // },200)
+        // var srcImg = $this[0].currentSrc
+        // imgModal.find(".showPreImg")[0].src = srcImg
         swiper.autoplay.stop()
-        imgModal.stop(true)
+        // imgModal.stop(true)
     }).on('mouseout', function(e){
-        var imgModal = $('#imgPreModal')
+        // var imgModal = $('#imgPreModal')
         swiper.autoplay.start()
-        imgModal.modal('hide')
-        imgModal.stop(true)
+        // imgModal.modal('hide')
+        // imgModal.stop(true)
     })
 </script>
 <script type="text/javascript" src="__PUBLIC__/static/js/main.js"></script>
