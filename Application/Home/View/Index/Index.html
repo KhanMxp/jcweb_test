@@ -160,7 +160,7 @@
                 <div class="swiper-wrapper">
                     <foreach name="lab_picture" item="vo">
                         <div class="swiper-slide" style="width: 300px; height: 200px; background-size: cover;">
-                            <img style="width: 300px; height: 200px; background-size: cover;z-index: -1;" src="{$vo.information_pic_path}" type="button" data-toggle="modal" data-target="#imgPreModal" data-whatever="{$vo.pic_path}" alt="..." onerror="onerror=null;src='__PUBLIC__/picture/logoo.png'" />               
+                            <img style="width: 300px; height: 200px; background-size: cover;" src="{$vo.information_pic_path}" alt="..." onerror="onerror=null;src='__PUBLIC__/picture/logoo.png'" />               
                         </div>
                     </foreach>
                 </div>
@@ -249,18 +249,12 @@
 
 	$('#lab-sence img').mouseover(function(e){
         var tooltip = "<div id='tooltip'><img src='"+ this.src +"' alt='风采预览' style='display:block;width:600px;height:400px;'/></div>";
-        console.log(this)
-        $('#lab-sence').append(tooltip);
+        $('body').append(tooltip);
 
         // 获取三个高度
         var scrollTop = document.documentElement.scrollTop;
         var clientHeight = document.documentElement.clientHeight;
         var featureTop = $("#lab-sence img").offset().top;
-
-        var x = e.offsetX;
-        var y = e.offsetY;
-        console.log('x', x)
-        console.log('y', y)
 
         console.log('clientHeight', clientHeight)
         console.log('scrollTop', scrollTop)
@@ -290,6 +284,7 @@
     }).mouseout(function(){ 
         $("#tooltip").remove();  //移除 
     })
+
     $('#lab-sence img').mousemove(function(e){
         // 获取三个高度
         var scrollTop = document.documentElement.scrollTop;
@@ -303,16 +298,16 @@
         if((featureTop - scrollTop)>(clientHeight/2)){
             console.log("元素在下半部")
             $("#tooltip") .css({
-                    "top":(e.pageY - 400 - 30) + "px",
-                    "left":(e.pageX - 600 - 30) + "px",
+                    "top":(e.pageY - 400 - 20) + "px",
+                    "left":(e.pageX - 600 - 20) + "px",
                     "z-index": 999
                 }).show("fast");
         }else{
             console.log('元素在上半部')
             $("#tooltip")
                 .css({
-                    "top": (e.pageY + 30) + "px",
-                    "left":  (e.pageX + 30)  + "px",
+                    "top": (e.pageY + 20) + "px",
+                    "left":  (e.pageX + 20)  + "px",
                     "z-index": 999
                 }).show("fast");
         }
