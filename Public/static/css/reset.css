@@ -72,7 +72,7 @@ h6 {
     font-family: 'Lato', sans-serif;
     /*font-family: 'Open Sans', sans-serif;*/
 }
-a { color:#0B1D33;  }
+a { color:rgb(131,131,131);  }
 p { line-height: 22px }
 hr{
     margin-top: 10px;
@@ -379,6 +379,7 @@ hr{
 #content-area .row #download-left .list-group .list-group-item .list-left-title .fake-downname{
     display: inline-block;
     width: 80%;
+    color:rgb(131,131,131);
     cursor: pointer;
     overflow: hidden;
     text-overflow:ellipsis;
@@ -479,14 +480,33 @@ hr{
 /* 报告查询 */
 #content-area .query-index{
     padding: 0;
-    background: #fff;
+    /* background: #fff; */
     border: 2px solid rgb(234, 234, 234);
     margin-top: 10px;
 }
 #content-area .query-index .report-query-index{
+    position: relative;
     width: 100%;
-    height: 440px;
+    height: 455px;
     padding: 0 15px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid rgb(234, 234, 234);
+}
+#content-area .query-index .report-query-index .mask-left{
+    position: absolute;
+    bottom: -20px;
+    left: -2px;
+    width: 2px;
+    height: 18px;
+    background-color: rgb(251, 251, 251);
+}
+#content-area .query-index .report-query-index .mask-right{
+    position: absolute;
+    bottom: -20px;
+    right: -2px;
+    width: 2px;
+    height: 18px;
+    background-color: rgb(244, 246, 247);
 }
 #content-area .report-query-index .report-query-title{
     float: left;
@@ -554,13 +574,14 @@ hr{
 /* 质检范围查询 */
 #content-area .scope-query-index{
     width: 100%;
-    height: 250px;
+    height: 218px;
+    margin-top: 10px;
     background: #fff;
-    border-top: 4px solid rgb(234, 234, 234);
+    border-top: 2px solid rgb(234, 234, 234);
     position: relative;
 }
 #content-area .scope-query-index .infomation-title{
-    margin-top: 60px;
+    margin-top: 20px;
 }
 #content-area .scope-query-index .input-group{
     float: left;
